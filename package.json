@@ -1,0 +1,26 @@
+{
+  "name": "exam-practice",
+  "version": "1.0.0",
+  "description": "contentfull ",
+ 
+  "scripts": {
+    "start" : "parcel index.html",
+    "build" : "parcel build index.html",
+    "test": "jest"
+  },
+  "keywords": [
+    "siddhesh",
+    "strong",
+    "smart"
+  ],
+  "author": "siddhesh shende",
+  "license": "ISC",
+  "devDependencies": {
+    "parcel": "^2.13.3",
+    "process": "^0.11.10"
+  },
+  "dependencies": {
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1"
+  }
+}
