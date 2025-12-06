@@ -15,12 +15,21 @@ const RBody = () => {
 
   const fetchData = async () => {
     try {
-      const data = await fetch("https://dummyjson.com/recipes");
+      const data = await fetch(
+        "https://www.swiggy.com/dapi/restaurants/list/v5?lat=21.99740&lng=79.00110&is-seo-homepage-enabled=true&page_type=DESKTOP_WEB_LISTING"
+      );
       const json = await data.json();
-      console.log("response:", json.recipes);
+      console.log(
+        "response:",
+        json.data.cards[4].card.card.gridElements.infoWithStyle.restaurants
+      );
 
-      setListOfRestaurant(json.recipes);
-      setFilteredList(json.recipes);
+      setListOfRestaurant(
+        json.data.cards[4].card.card.gridElements.infoWithStyle.restaurants
+      );
+      setFilteredList(
+        json.data.cards[4].card.card.gridElements.infoWithStyle.restaurants
+      );
     } catch (error) {
       console.error("Error fetching recipes:", error);
     }
@@ -28,7 +37,7 @@ const RBody = () => {
 
   const handleTopRated = () => {
     const filteredData = listOfRestaurant.filter(
-      (recipe) => recipe.rating > 4.5
+      (recipe) => recipe.info.avgRatingString > 4.2
     );
     setFilteredList(filteredData);
   };
@@ -52,7 +61,9 @@ const RBody = () => {
             className="search-btn"
             onClick={() => {
               const filteredData = listOfRestaurant.filter((recipe) =>
-                recipe.name.toLowerCase().includes(searchTerm.toLowerCase())
+                recipe.info.name
+                  .toLowerCase()
+                  .includes(searchTerm.toLowerCase())
               );
               console.log("Filtered Data:", filteredData);
               setFilteredList(filteredData);
@@ -68,12 +79,16 @@ const RBody = () => {
       <div className="hotel-container">
         {filteredList.map((recipe) => (
           <HotelCard
-            key={recipe.id}
-            Name={recipe.name}
-            Cuisine={recipe.cuisine}
-            Rating={recipe.rating}
-            Calories={recipe.caloriesPerServing}
-            Image={recipe.image}
+            key={recipe.info.id}
+            Name={recipe.info.name}
+            Cuisine={recipe.info.cuisines}
+            Rating={recipe.info.avgRatingString}
+            DeliveryTime={recipe.info.sla.slaString}
+            CostForTwo={recipe.info.costForTwo}
+            Image={
+              "https://media-assets.swiggy.com/swiggy/image/upload/fl_lossy,f_auto,q_auto,w_300/" +
+              recipe.info.cloudinaryImageId
+            }
           />
         ))}
       </div>
