@@ -18,6 +18,10 @@ const RestaurantMenuDetails = () => {
         `https://www.swiggy.com/dapi/menu/pl?page-type=REGULAR_MENU&complete-menu=true&lat=18.5288974&lng=73.8665321&restaurantId=${resId}`
       );
 
+
+
+
+      
       console.log("Response status:", response.status);
 
       // Use text() first to handle empty responses safely
