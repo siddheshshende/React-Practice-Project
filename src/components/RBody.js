@@ -1,13 +1,14 @@
 import { useEffect, useState } from "react";
 import HotelCard from "./HotelCard";
 import Shimmer from "./Shimmer";
+import { Link } from "react-router-dom";
 
 const RBody = () => {
   const [listOfRestaurant, setListOfRestaurant] = useState([]);
   const [filteredList, setFilteredList] = useState([]);
   const [searchTerm, setSearchTerm] = useState("");
 
-  console.log("render");
+  console.log("render rbody");
 
   useEffect(() => {
     fetchData();
@@ -15,9 +16,8 @@ const RBody = () => {
 
   const fetchData = async () => {
     try {
-      const data = await fetch(
-        "https://www.swiggy.com/dapi/restaurants/list/v5?lat=21.99740&lng=79.00110&is-seo-homepage-enabled=true&page_type=DESKTOP_WEB_LISTING"
-      );
+      const data = await fetch("https://www.swiggy.com/dapi/restaurants/list/v5?lat=18.5288974&lng=73.8665321&is-seo-homepage-enabled=true&page_type=DESKTOP_WEB_LISTING");
+
       const json = await data.json();
       console.log(
         "response:",
@@ -78,18 +78,22 @@ const RBody = () => {
 
       <div className="hotel-container">
         {filteredList.map((recipe) => (
-          <HotelCard
+          <Link
             key={recipe.info.id}
-            Name={recipe.info.name}
-            Cuisine={recipe.info.cuisines}
-            Rating={recipe.info.avgRatingString}
-            DeliveryTime={recipe.info.sla.slaString}
-            CostForTwo={recipe.info.costForTwo}
-            Image={
-              "https://media-assets.swiggy.com/swiggy/image/upload/fl_lossy,f_auto,q_auto,w_300/" +
-              recipe.info.cloudinaryImageId
-            }
-          />
+            to={`/restaurant/${recipe.info.id}`}
+            style={{ textDecoration: "none", color: "inherit" }}>
+            <HotelCard
+              Name={recipe.info.name}
+              Cuisine={recipe.info.cuisines}
+              Rating={recipe.info.avgRatingString}
+              DeliveryTime={recipe.info.sla.slaString}
+              CostForTwo={recipe.info.costForTwo}
+              Image={
+                "https://media-assets.swiggy.com/swiggy/image/upload/fl_lossy,f_auto,q_auto,w_300/" +
+                recipe.info.cloudinaryImageId
+              }
+            />
+          </Link>
         ))}
       </div>
     </div>
