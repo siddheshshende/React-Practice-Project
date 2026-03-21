@@ -15,13 +15,13 @@ const RestaurantMenuDetails = () => {
   const fetchMenu = async () => {
     try {
       const response = await fetch(
-        `https://www.swiggy.com/dapi/menu/pl?page-type=REGULAR_MENU&complete-menu=true&lat=18.5288974&lng=73.8665321&restaurantId=${resId}`
+        `https://www.swiggy.com/api/menu?page-type=REGULAR_MENU&complete-menu=true&lat=18.5288974&lng=73.8665321&&submitAction=ENTER&restaurantId=${resId}`
       );
 
 
 
 
-      
+
       console.log("Response status:", response.status);
 
       // Use text() first to handle empty responses safely

@@ -9,7 +9,7 @@ const RBody = () => {
   const [searchTerm, setSearchTerm] = useState("");
 
   console.log("render rbody");
-
+  console.log("use", useState());
   useEffect(() => {
     fetchData();
   }, []);

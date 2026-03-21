@@ -200,5 +200,13 @@ body {
   .content p {
     font-size: 14.5px;
   }
+}
 
-
+/*--------------------------------------------------------------------------------------------------------------------*/
+.user-card{
+  border: 1px solid salmon;
+  padding: 2rem;
+  margin: 2rem;
+  border-radius: 2rem;
+  background-color: seashell;
+}
