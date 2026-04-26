@@ -1,10 +1,10 @@
 import { Link } from "react-router-dom";
 import CompanyLogo from "../../assets/food-company_logo-horizontal.jpg";
 import { useState } from "react";
-
+import useOnlineStatus from "../utils/useOnlineStatus.js";
 const Header = () => {
   const [Btn, setBtn] = useState("login");
-
+  const isOnlineStatus = useOnlineStatus();
   return (
     <div className="header">
       <div className="logo-container">
@@ -14,6 +14,9 @@ const Header = () => {
       </div>
       <div className="nav-items">
         <ul>
+          <li>
+            <p>Online Status: {isOnlineStatus ? "Online" : "Offline"}</p>
+          </li>
           <li>
             <Link to="/">Home </Link>
           </li>

@@ -1,7 +1,10 @@
 import { useRouteError, useNavigate } from "react-router-dom";
+
+
 const Error = () => {
   const err = useRouteError();
   const navigate = useNavigate();
+ 
   return (
     <section>
       <div className="error-page">
@@ -15,7 +18,6 @@ const Error = () => {
           </p>
 
           <p>Sorry for the Inconvenience.</p>
-
           <div className="btns">
             <button className="fill" onClick={() => navigate(-1)}>
               Go back

@@ -2,45 +2,32 @@ import { useEffect, useState } from "react";
 import HotelCard from "./HotelCard";
 import Shimmer from "./Shimmer";
 import { Link } from "react-router-dom";
-
+import useOnlineStatus from "../utils/useOnlineStatus.js";
+import useRBody from "../utils/useRBody.js";
 const RBody = () => {
-  const [listOfRestaurant, setListOfRestaurant] = useState([]);
+  // const [listOfRestaurant, setListOfRestaurant] = useState([]);
   const [filteredList, setFilteredList] = useState([]);
   const [searchTerm, setSearchTerm] = useState("");
 
   console.log("render rbody");
   console.log("use", useState());
+  const isOnlineStatus = useOnlineStatus();
+  const listOfRestaurant = useRBody();
+
+  //  Sync filteredList when API data arrives
   useEffect(() => {
-    fetchData();
-  }, []);
+    setFilteredList(listOfRestaurant);
+  }, [listOfRestaurant]);
 
-  const fetchData = async () => {
-    try {
-      const data = await fetch("https://www.swiggy.com/dapi/restaurants/list/v5?lat=18.5288974&lng=73.8665321&is-seo-homepage-enabled=true&page_type=DESKTOP_WEB_LISTING");
-
-      const json = await data.json();
-      console.log(
-        "response:",
-        json.data.cards[4].card.card.gridElements.infoWithStyle.restaurants
-      );
-
-      setListOfRestaurant(
-        json.data.cards[4].card.card.gridElements.infoWithStyle.restaurants
-      );
-      setFilteredList(
-        json.data.cards[4].card.card.gridElements.infoWithStyle.restaurants
-      );
-    } catch (error) {
-      console.error("Error fetching recipes:", error);
-    }
-  };
 
   const handleTopRated = () => {
     const filteredData = listOfRestaurant.filter(
-      (recipe) => recipe.info.avgRatingString > 4.2
+      (recipe) => recipe.info.avgRatingString > 4.2,
     );
     setFilteredList(filteredData);
   };
+  console.log("isOnlineStatus", isOnlineStatus);
+  if (isOnlineStatus === false) return <h1> You are offline</h1>;
 
   return listOfRestaurant.length === 0 ? (
     <Shimmer />
@@ -63,7 +50,7 @@ const RBody = () => {
               const filteredData = listOfRestaurant.filter((recipe) =>
                 recipe.info.name
                   .toLowerCase()
-                  .includes(searchTerm.toLowerCase())
+                  .includes(searchTerm.toLowerCase()),
               );
               console.log("Filtered Data:", filteredData);
               setFilteredList(filteredData);

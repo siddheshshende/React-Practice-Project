@@ -136,11 +136,14 @@ body {
   background: linear-gradient(45deg, #000428, #004e92, #000428);
   background-size: 600% 600%;
   animation: bg 10s ease infinite;
-  font-family: "Georgia", Times New Roman;
+  font-family:
+    "Georgia",
+    Times New Roman;
 }
 
 @keyframes bg {
-  0%, 100% {
+  0%,
+  100% {
     background-position: 0% 97%;
   }
   50% {
@@ -181,8 +184,6 @@ body {
   transition: 0.3s ease;
 }
 
-
-
 .content .fill:hover {
   background-color: #fafafa;
   border-color: #ccc;
@@ -203,10 +204,15 @@ body {
 }
 
 /*--------------------------------------------------------------------------------------------------------------------*/
-.user-card{
+.user-card {
   border: 1px solid salmon;
   padding: 2rem;
   margin: 2rem;
   border-radius: 2rem;
   background-color: seashell;
+}
+.UserImage {
+  height: 200px;
+  width: 200px;
+  object-fit: cover;
 }
