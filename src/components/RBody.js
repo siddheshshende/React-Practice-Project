@@ -33,11 +33,11 @@ const RBody = () => {
     <Shimmer />
   ) : (
     <div className="rBody">
-      <div className="filter-search">
-        <div className="search">
+      <div className="flex justify-center items-center md:flex-row flex-col gap-4 p-4  ">
+        <div className="flex sm:flex-row flex-col  gap-2">
           <input
             type="text"
-            className="search-box"
+            className="border border-gray-400 rounded-2xl px-4 py-2 focus:outline-none focus:ring-1 focus:ring-amber-950"
             placeholder="Search for recipes..."
             value={searchTerm}
             onChange={(e) => {
@@ -45,7 +45,7 @@ const RBody = () => {
             }}
           />
           <button
-            className="search-btn"
+            className="cursor-pointer rounded-2xl px-4 py-2  bg-amber-950 text-white"
             onClick={() => {
               const filteredData = listOfRestaurant.filter((recipe) =>
                 recipe.info.name
@@ -58,12 +58,12 @@ const RBody = () => {
             Search
           </button>
         </div>
-        <button className="filter-btn" onClick={handleTopRated}>
+        <button   className="cursor-pointer rounded-2xl px-4 py-2  bg-amber-950 text-white" onClick={handleTopRated}>
           Top Rated Recipes
         </button>
       </div>
 
-      <div className="hotel-container">
+      <div className="hotel-container grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4  gap-4  m-4">
         {filteredList.map((recipe) => (
           <Link
             key={recipe.info.id}

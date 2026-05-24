@@ -9,6 +9,10 @@ import Contact from "./components/Contact";
 import Cart from "./components/Cart";
 import Error from "./components/Error";
 import RestaurantMenuDetails from "./components/RestaurantMenuDetails";
+//import Grocery from "./components/Grocery";
+import { lazy } from "react";
+
+const Grocery =lazy(() => import("./components/Grocery"));
 
 const AppLayout = () => {
   return (
@@ -29,6 +33,7 @@ const appRouter = createBrowserRouter([
       { path: "about", element: <About /> },
       { path: "contact", element: <Contact /> },
       { path: "cart", element: <Cart /> },
+      { path: "grocery", element: <Grocery /> },
       { path: "restaurant/:resId", element: <RestaurantMenuDetails /> },
     ],
   },

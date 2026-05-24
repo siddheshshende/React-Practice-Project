@@ -6,31 +6,40 @@ const Header = () => {
   const [Btn, setBtn] = useState("login");
   const isOnlineStatus = useOnlineStatus();
   return (
-    <div className="header">
-      <div className="logo-container">
-        <p>Diet</p>
-        <img src={CompanyLogo} className="logo" alt="company logo" />
-        <p>Eatery</p>
+    <header className="flex justify-between items-center p-4 bg-gray-100 shadow-lg">
+      <div className=" flex justify-between items-center">
+        <p className="text-2xl font-bold ">Diet</p>
+        {/* <img
+          src={CompanyLogo}
+          className=" w-16 h-16 object-cover"
+          alt="company logo"
+        /> */}
+        <p className="text-2xl font-bold ">Eatery</p>
       </div>
       <div className="nav-items">
-        <ul>
+        <ul className="flex justify-between items-center gap-2 p-1">
           <li>
-            <p>Online Status: {isOnlineStatus ? "Online" : "Offline"}</p>
+            <p >
+              Online Status: <strong className={`${isOnlineStatus ? 'text-green-500' : 'text-red-500'}`}> {isOnlineStatus ? "Online" : "Offline"}</strong>
+            </p>
           </li>
           <li>
-            <Link to="/">Home </Link>
+            <Link  to="/" className="cursor-pointer">Home </Link>
           </li>
           <li>
-            <Link to="/about">About </Link>
+            <Link to="/about" className="cursor-pointer">About </Link>
           </li>
           <li>
-            <Link to="/contact">Contact Us </Link>
+            <Link to="/contact" className="cursor-pointer">Contact Us </Link>
           </li>
           <li>
-            <Link to="/cart">Cart </Link>
+            <Link to="/cart" className="cursor-pointer">Cart </Link>
+          </li>
+          <li>
+            <Link to="/grocery" className="cursor-pointer">Grocery </Link>
           </li>
           <button
-            className="Login-Btn"
+            className="border-2 border-gray-500 rounded-2xl px-4 py-2 cursor-pointer"
             onClick={() => {
               setBtn(Btn === "login" ? "logout" : "login");
             }}>
@@ -38,7 +47,7 @@ const Header = () => {
           </button>
         </ul>
       </div>
-    </div>
+    </header>
   );
 };
 export default Header;
