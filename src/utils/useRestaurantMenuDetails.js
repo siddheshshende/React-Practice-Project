@@ -3,11 +3,14 @@ import {useEffect, useState } from "react";
 const useRestaurantMenuDetails =(resId)=>{
   const [resInfo, setResInfo] = useState(null);
   const [error, setError] = useState(null);
+  
 useEffect(()=>{
+ if (!resId) return;
  fetchMenu();
 },[resId])
   
   const fetchMenu = async () => {
+    if (!resId) return;
     try {
       const response = await fetch(
         `https://www.swiggy.com/api/menu?page-type=REGULAR_MENU&complete-menu=true&lat=18.5288974&lng=73.8665321&&submitAction=ENTER&restaurantId=${resId}`

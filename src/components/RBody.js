@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import HotelCard from "./HotelCard";
+import HotelCard, { withOpenLabel } from "./HotelCard";
 import Shimmer from "./Shimmer";
 import { Link } from "react-router-dom";
 import useOnlineStatus from "../utils/useOnlineStatus.js";
@@ -13,12 +13,12 @@ const RBody = () => {
   console.log("use", useState());
   const isOnlineStatus = useOnlineStatus();
   const listOfRestaurant = useRBody();
+  const OpenedHotelCard = withOpenLabel(HotelCard);
 
   //  Sync filteredList when API data arrives
   useEffect(() => {
     setFilteredList(listOfRestaurant);
   }, [listOfRestaurant]);
-
 
   const handleTopRated = () => {
     const filteredData = listOfRestaurant.filter(
@@ -27,6 +27,7 @@ const RBody = () => {
     setFilteredList(filteredData);
   };
   console.log("isOnlineStatus", isOnlineStatus);
+  console.log("listOfRestaurant", listOfRestaurant);
   if (isOnlineStatus === false) return <h1> You are offline</h1>;
 
   return listOfRestaurant.length === 0 ? (
@@ -58,7 +59,9 @@ const RBody = () => {
             Search
           </button>
         </div>
-        <button   className="cursor-pointer rounded-2xl px-4 py-2  bg-amber-950 text-white" onClick={handleTopRated}>
+        <button
+          className="cursor-pointer rounded-2xl px-4 py-2  bg-amber-950 text-white"
+          onClick={handleTopRated}>
           Top Rated Recipes
         </button>
       </div>
@@ -69,17 +72,31 @@ const RBody = () => {
             key={recipe.info.id}
             to={`/restaurant/${recipe.info.id}`}
             style={{ textDecoration: "none", color: "inherit" }}>
-            <HotelCard
-              Name={recipe.info.name}
-              Cuisine={recipe.info.cuisines}
-              Rating={recipe.info.avgRatingString}
-              DeliveryTime={recipe.info.sla.slaString}
-              CostForTwo={recipe.info.costForTwo}
-              Image={
-                "https://media-assets.swiggy.com/swiggy/image/upload/fl_lossy,f_auto,q_auto,w_300/" +
-                recipe.info.cloudinaryImageId
-              }
-            />
+            {recipe.info.isOpen ? (
+              <OpenedHotelCard
+                Name={recipe.info.name}
+                Cuisine={recipe.info.cuisines}
+                Rating={recipe.info.avgRatingString}
+                DeliveryTime={recipe.info.sla.slaString}
+                CostForTwo={recipe.info.costForTwo}
+                Image={
+                  "https://media-assets.swiggy.com/swiggy/image/upload/fl_lossy,f_auto,q_auto,w_300/" +
+                  recipe.info.cloudinaryImageId
+                }
+              />
+            ) : (
+              <HotelCard
+                Name={recipe.info.name}
+                Cuisine={recipe.info.cuisines}
+                Rating={recipe.info.avgRatingString}
+                DeliveryTime={recipe.info.sla.slaString}
+                CostForTwo={recipe.info.costForTwo}
+                Image={
+                  "https://media-assets.swiggy.com/swiggy/image/upload/fl_lossy,f_auto,q_auto,w_300/" +
+                  recipe.info.cloudinaryImageId
+                }
+              />
+            )}
           </Link>
         ))}
       </div>
