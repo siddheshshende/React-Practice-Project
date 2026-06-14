@@ -4,7 +4,7 @@ const ItemListAccordian = ({ items }) => {
   {
     /*accordian body*/
   }
-  console.log("items of accordian: ", items);
+  // console.log("items of accordian: ", items);
   return (
     <div>
       ItemListAccordian

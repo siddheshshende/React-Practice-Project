@@ -1,6 +1,10 @@
+import { useContext } from "react";
+import userContext from "../utils/userContext";
+
 const HotelCard = (props) => {
-  const { Name, DeliveryTime, Cuisine, Rating, Image, CostForTwo } =
-    props;
+  const { Name, DeliveryTime, Cuisine, Rating, Image, CostForTwo } = props;
+
+  const data = useContext(userContext);
   return (
     <div className=" p-4  bg-gray-200 rounded-lg shadow-md w-full">
       <div className="h-48 w-full mb-4">
@@ -17,6 +21,7 @@ const HotelCard = (props) => {
       <h5 className="text-green-500 font-bold">Rating: {Rating} ⭐</h5>
       <h5 className="text-base">Cost: {CostForTwo}</h5>
       <h5 className="text-gray-600">Delivery Time: {DeliveryTime} </h5>
+      <h5 className="text-gray-600">User: {data.name} </h5>
     </div>
   );
 };
@@ -26,7 +31,9 @@ export const withOpenLabel = (HotelCard) => {
   return (props) => {
     return (
       <div>
-        <p className="bg-yellow-700 text-white p-2 rounded-lg  absolute"  >Open</p>
+        <p className="bg-yellow-700 text-white p-2 rounded-lg  absolute">
+          Open
+        </p>
         <HotelCard {...props} />
       </div>
     );

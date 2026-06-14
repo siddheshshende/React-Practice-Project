@@ -4,13 +4,16 @@ import Shimmer from "./Shimmer";
 import { Link } from "react-router-dom";
 import useOnlineStatus from "../utils/useOnlineStatus.js";
 import useRBody from "../utils/useRBody.js";
+import { useContext } from "react";
+import userContext from "../utils/userContext.js";
+
 const RBody = () => {
   // const [listOfRestaurant, setListOfRestaurant] = useState([]);
   const [filteredList, setFilteredList] = useState([]);
   const [searchTerm, setSearchTerm] = useState("");
 
-  console.log("render rbody");
-  console.log("use", useState());
+  // console.log("render rbody");
+  // console.log("use", useState());
   const isOnlineStatus = useOnlineStatus();
   const listOfRestaurant = useRBody();
   const OpenedHotelCard = withOpenLabel(HotelCard);
@@ -26,9 +29,11 @@ const RBody = () => {
     );
     setFilteredList(filteredData);
   };
-  console.log("isOnlineStatus", isOnlineStatus);
-  console.log("listOfRestaurant", listOfRestaurant);
+  // console.log("isOnlineStatus", isOnlineStatus);
+  // console.log("listOfRestaurant", listOfRestaurant);
   if (isOnlineStatus === false) return <h1> You are offline</h1>;
+
+  const { name, setUserName} = useContext(userContext);
 
   return listOfRestaurant.length === 0 ? (
     <Shimmer />
@@ -53,7 +58,7 @@ const RBody = () => {
                   .toLowerCase()
                   .includes(searchTerm.toLowerCase()),
               );
-              console.log("Filtered Data:", filteredData);
+              // console.log("Filtered Data:", filteredData);
               setFilteredList(filteredData);
             }}>
             Search
@@ -64,6 +69,13 @@ const RBody = () => {
           onClick={handleTopRated}>
           Top Rated Recipes
         </button>
+        <input
+          type="text"
+          className="border border-gray-400 rounded-2xl px-4 py-2 focus:outline-none focus:ring-1 focus:ring-amber-950"
+          placeholder="Enter User Name..."
+          value={name}
+          onChange={(e) => setUserName(e.target.value) }
+        />
       </div>
 
       <div className="hotel-container grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4  gap-4  m-4">

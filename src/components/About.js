@@ -1,6 +1,7 @@
 import { Component } from "react";
 import User from "./User";
 import UserClass from "./UserClass";
+import userContext from "../utils/userContext";
 
 class About extends Component {
   constructor(props) {
@@ -10,7 +11,6 @@ class About extends Component {
 
   componentDidMount() {
     //console.log("parent componentDidMount");
-    
   }
 
   render() {
@@ -20,6 +20,9 @@ class About extends Component {
         <p>About Us Class Component</p>
 
         <User name={"siddhesh function"} />
+        <userContext.Consumer>
+          {(data) => (<p>User----------------: {data.name}</p>)}
+        </userContext.Consumer>
         <UserClass name={"First"} location={" class"} />
       </div>
     );

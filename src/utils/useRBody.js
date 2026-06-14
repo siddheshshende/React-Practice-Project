@@ -14,11 +14,11 @@ const useRBody = () => {
       );
 
       const json = await data.json();
-      console.log("json:", json);
-      console.log(
-        "response:",
-        json.data.cards[4].card.card.gridElements.infoWithStyle.restaurants,
-      );
+      // console.log("json:", json);
+      // console.log(
+      //   "response:",
+      //   json.data.cards[4].card.card.gridElements.infoWithStyle.restaurants,
+      // );
 
       setListOfRestaurant(
         json.data.cards[4].card.card.gridElements.infoWithStyle.restaurants,

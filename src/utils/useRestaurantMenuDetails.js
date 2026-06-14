@@ -16,18 +16,18 @@ useEffect(()=>{
         `https://www.swiggy.com/api/menu?page-type=REGULAR_MENU&complete-menu=true&lat=18.5288974&lng=73.8665321&&submitAction=ENTER&restaurantId=${resId}`
       );
 
-      console.log("Response status:", response.status);
+      // console.log("Response status:", response.status);
 
       // Use text() first to handle empty responses safely
       const text = await response.text();
-      console.log("Response length:", text.length);
+      // console.log("Response length:", text.length);
 
       if (!text || text.length === 0) {
         throw new Error("Empty response from API - Swiggy may be blocking the request");
       }
 
       const json = JSON.parse(text);
-      console.log("data-", json);
+      // console.log("data-", json);
 
       // Check Swiggy's own statusCode (1 = error, 0 = success)
       if (json.statusCode === 1) {

@@ -4,18 +4,18 @@ const User = ({ name }) => {
   const [count, setCount] = useState(0);
 
   useEffect(() => {
-    console.log("useEffect called");
+    // console.log("useEffect called");
  const time =   setInterval(() => {
-      console.log("setInterval called");
+      // console.log("setInterval called");
     }, 1000);
 
     return () => {
       clearInterval(time);
-      console.log("useEffect return function called");
+      // console.log("useEffect return function called");
     };
   }, []);
 
-  console.log("outside useEffect called");
+  // console.log("outside useEffect called");
 
   return (
     <div className="user-card">

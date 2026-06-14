@@ -1,10 +1,18 @@
 import { Link } from "react-router-dom";
 import CompanyLogo from "../../assets/food-company_logo-horizontal.jpg";
-import { useState } from "react";
+import { useState , useContext} from "react";
 import useOnlineStatus from "../utils/useOnlineStatus.js";
+import userContext from "../utils/userContext.js";
+
 const Header = () => {
   const [Btn, setBtn] = useState("login");
   const isOnlineStatus = useOnlineStatus();
+
+
+  const data = useContext(userContext);
+  console.log("data from context", data);
+
+  
   return (
     <header className="flex justify-between items-center p-4 bg-gray-100 shadow-lg">
       <div className=" flex justify-between items-center">
@@ -45,6 +53,9 @@ const Header = () => {
             }}>
             {Btn}
           </button>
+                <li>
+            <Link to="/" className="cursor-pointer">{data.name} </Link>
+          </li>
         </ul>
       </div>
     </header>

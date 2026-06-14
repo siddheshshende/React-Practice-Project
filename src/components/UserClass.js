@@ -18,7 +18,7 @@ class UserClass extends React.Component {
     //   console.log("setInterval called");
     // }, 1000);
 
-    console.log(this.props.name + "child componentDidMount");
+    // console.log(this.props.name + "child componentDidMount");
 
     const data = await fetch("https://api.github.com/users/siddheshshende");
     const Json = await data.json();

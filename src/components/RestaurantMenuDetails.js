@@ -4,7 +4,7 @@ import useRBody from "../utils/useRBody";
 
 const RestaurantMenuDetails = () => {
   const { resId } = useParams();
-  console.log("resId: ", resId);
+  // console.log("resId: ", resId);
   const listOfRestaurant = useRBody();
   const restaurant = listOfRestaurant.find(
     (item) => String(item?.info?.id) === String(resId),
@@ -16,7 +16,7 @@ const RestaurantMenuDetails = () => {
 
   const { name, cuisines, costForTwoMessage, avgRatingString } =
     restaurant.info;
-  console.log("data: ", restaurant.info.itemCards);
+  // console.log("data: ", restaurant.info.itemCards);
 
   return (
     <section>
